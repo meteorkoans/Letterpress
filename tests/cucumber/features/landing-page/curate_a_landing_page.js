@@ -10,9 +10,10 @@ module.exports = function() {
     this.client.url(process.env.ROOT_URL).call(callback);
   });
 
-  this.Then(/^they see the landing page "([^"]*)"$/, function (arg1, callback) {
+  this.Then(/^they see the landing page "([^"]*)"$/, function (heading, callback) {
     // Write code here that turns the phrase above into concrete actions
-    callback.pending();
+    this.client.waitForVisible('h1').
+      getText('h1').should.become(heading).and.notify(callback);
   });
 
 };
